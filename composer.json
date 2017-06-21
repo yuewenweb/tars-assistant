@@ -1,0 +1,20 @@
+{
+    "name": "phptars/tars-assistant",
+    "description": "phpassistant for tars client",
+    "authors": [
+        {
+            "name": "Chen Liang",
+            "email": "liangchen@yuewen.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+      "php": ">=5.5.15"
+    },
+    "autoload": {
+      "classmap": [
+        "TarsAssistant.php",
+        "TarsException.php"
+      ]
+    }
+}
