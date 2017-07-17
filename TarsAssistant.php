@@ -403,18 +403,18 @@ class TarsAssistant
         }
     }
 
-    public function sendAndReceive($timeout=2) {
+    public function sendAndReceive() {
         // 首先尝试encode
         try {
             $this->requestBuf = \TARS::encode($this->iVersion,self::$iRequestId,$this->servantName,
-                $this->funcName,$this->cPacketType,$this->iMessageType,$timeout,$this->contexts,$this->statuses,$this->encodeBufs);
+                $this->funcName,$this->cPacketType,$this->iMessageType,$this->iTimeout,$this->contexts,$this->statuses,$this->encodeBufs);
             $this->encodeBufs = array();
 
             $ret = self::TARS_SUCCESS;
             if ($this->socketMode === self::SOCKET_MODE_UDP) {
-                $ret = $this->udpSocket($timeout);
+                $ret = $this->udpSocket();
             } else if($this->socketMode === self::SOCKET_MODE_TCP) {
-                $ret = $this->tcpSocket($timeout);
+                $ret = $this->tcpSocket();
             }
 
             // 收发包失败了
@@ -449,7 +449,7 @@ class TarsAssistant
      * @param $timeout
      * @return int 0-成功，非0-失败（具体参考类头部错误码常量定义）
      */
-    private function udpSocket($timeout)
+    private function udpSocket()
     {
 
         $time = microtime(true);
@@ -470,14 +470,14 @@ class TarsAssistant
             return self::TARS_SOCKET_SEND_FAILED; // socket发送失败
         }
 
-        if (0 == $timeout) {
+        if (0 == $this->iTimeout) {
             socket_close($sock);
             return self::TARS_SUCCESS; // 无回包的情况，返回成功
         }
 
         $read = array($sock);
-        $second = floor($timeout);
-        $usecond = ($timeout - $second) * 1000000;
+        $second = floor($this->iTimeout);
+        $usecond = ($this->iTimeout - $second) * 1000000;
         $ret = socket_select($read, $write, $except, $second, $usecond);
 
         if (FALSE === $ret) {
@@ -491,7 +491,7 @@ class TarsAssistant
         $out = null;
         $this->responseBuf = null;
         while (true) {
-            if (microtime(true) - $time > $timeout) {
+            if (microtime(true) - $time > $this->iTimeout) {
                 socket_close($sock);
                 return self::TARS_SOCKET_TIMEOUT; // 收包超时
             }
@@ -517,7 +517,7 @@ class TarsAssistant
      * @param $timeout
      * @return int 0-成功，非0-失败（具体参考类头部错误码常量定义）
      */
-    private function tcpSocket($timeout)
+    private function tcpSocket()
     {
         $time = microtime(true);
         $sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
@@ -536,9 +536,14 @@ class TarsAssistant
             socket_close($sock);
             return self::TARS_SOCKET_SEND_FAILED;
         }
+        // 如果timeout为0，不等回包
+        if (0 == $this->iTimeout) {
+            socket_close($sock);
+            return self::TARS_SUCCESS; // 无回包的情况，返回成功
+        }
 
         $read = array($sock);
-        $ret = socket_select($read, $write, $except, $timeout);
+        $ret = socket_select($read, $write, $except, $this->iTimeout);
 
         if (false === $ret) {
             socket_close($sock);
@@ -551,7 +556,7 @@ class TarsAssistant
         $totalLen = 0;
         $this->responseBuf = null;
         while (true) {
-            if (microtime(true) - $time > $timeout) {
+            if (microtime(true) - $time > $this->iTimeout) {
                 socket_close($sock);
                 return self::TARS_SOCKET_TIMEOUT; // 收包超时
             }
