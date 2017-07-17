@@ -1,6 +1,8 @@
 {
     "name": "phptars/tars-assistant",
     "description": "phpassistant for tars client",
+    "license":"MIT",
+    "version":"0.1.0",
     "authors": [
         {
             "name": "Chen Liang",
