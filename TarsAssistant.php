@@ -83,7 +83,7 @@ class TarsAssistant
 
     public function putBool($paramName,$bool) {
         try {
-            $boolBuffer = \TARSAPI::putBool($paramName,$bool);
+            $boolBuffer = \TUPAPI::putBool($paramName,$bool);
 
             $this->encodeBufs[$paramName] = $boolBuffer;
 
@@ -95,7 +95,7 @@ class TarsAssistant
     }
     public function getBool($name) {
         try {
-            $result = \TARSAPI::getBool($name,$this->decodeData);
+            $result = \TUPAPI::getBool($name,$this->decodeData);
 
             return $result;
 
@@ -107,7 +107,7 @@ class TarsAssistant
 
     public function putChar($paramName,$char) {
         try {
-            $charBuffer = \TARSAPI::putChar($paramName,$char);
+            $charBuffer = \TUPAPI::putChar($paramName,$char);
             $this->encodeBufs[$paramName] = $charBuffer;
 
             return  self::TARS_SUCCESS;
@@ -119,7 +119,7 @@ class TarsAssistant
 
     public function getChar($name) {
         try {
-            $result = \TARSAPI::getChar($name,$this->decodeData);
+            $result = \TUPAPI::getChar($name,$this->decodeData);
 
             return  $result;
 
@@ -131,7 +131,7 @@ class TarsAssistant
 
     public function putUInt8($paramName,$uint8) {
         try {
-            $uint8Buffer = \TARSAPI::putUInt8($paramName,$uint8);
+            $uint8Buffer = \TUPAPI::putUInt8($paramName,$uint8);
             $this->encodeBufs[$paramName] = $uint8Buffer;
 
             return self::TARS_SUCCESS;
@@ -144,7 +144,7 @@ class TarsAssistant
 
     public function getUInt8($name) {
         try {
-            $result = \TARSAPI::getUInt8($name,$this->decodeData);
+            $result = \TUPAPI::getUInt8($name,$this->decodeData);
 
             return  $result;
         } catch (\Exception $e) {
@@ -155,7 +155,7 @@ class TarsAssistant
 
     public function putShort($paramName,$short) {
         try {
-            $shortBuffer = \TARSAPI::putShort($paramName,$short);
+            $shortBuffer = \TUPAPI::putShort($paramName,$short);
 
             $this->encodeBufs[$paramName] = $shortBuffer;
 
@@ -168,7 +168,7 @@ class TarsAssistant
 
     public function getShort($name) {
         try {
-            $result = \TARSAPI::getShort($name,$this->decodeData);
+            $result = \TUPAPI::getShort($name,$this->decodeData);
 
             return $result;
         } catch (\Exception $e) {
@@ -179,7 +179,7 @@ class TarsAssistant
 
     public function putUInt16($paramName,$uint16) {
         try {
-            $uint16Buffer = \TARSAPI::putUInt16($paramName,$uint16);
+            $uint16Buffer = \TUPAPI::putUInt16($paramName,$uint16);
 
             $this->encodeBufs[$paramName] = $uint16Buffer;
 
@@ -193,7 +193,7 @@ class TarsAssistant
 
     public function getUInt16($name) {
         try {
-            $result = \TARSAPI::getUInt16($name,$this->decodeData);
+            $result = \TUPAPI::getUInt16($name,$this->decodeData);
 
             return  $result;
         } catch (\Exception $e) {
@@ -203,7 +203,7 @@ class TarsAssistant
 
     public function putInt32($paramName,$int) {
         try {
-            $int32Buffer = \TARSAPI::putInt32($paramName,$int);
+            $int32Buffer = \TUPAPI::putInt32($paramName,$int);
             $this->encodeBufs[$paramName] = $int32Buffer;
 
             return  self::TARS_SUCCESS;
@@ -215,7 +215,7 @@ class TarsAssistant
 
     public function getInt32($name) {
         try {
-            $result = \TARSAPI::getInt32($name,$this->decodeData);
+            $result = \TUPAPI::getInt32($name,$this->decodeData);
 
             return $result;
         } catch (\Exception $e) {
@@ -226,7 +226,7 @@ class TarsAssistant
 
     public function putUInt32($paramName,$uint) {
         try {
-            $uint32Buffer = \TARSAPI::putUInt32($paramName,$uint);
+            $uint32Buffer = \TUPAPI::putUInt32($paramName,$uint);
             $this->encodeBufs[$paramName] = $uint32Buffer;
 
             return self::TARS_SUCCESS;
@@ -238,7 +238,7 @@ class TarsAssistant
 
     public function getUInt32($name) {
         try {
-            $result = \TARSAPI::getUInt32($name,$this->decodeData);
+            $result = \TUPAPI::getUInt32($name,$this->decodeData);
 
             return  $result;
         } catch (\Exception $e) {
@@ -249,7 +249,7 @@ class TarsAssistant
 
     public function putInt64($paramName,$bigint) {
         try {
-            $int64Buffer = \TARSAPI::putInt64($paramName,$bigint);
+            $int64Buffer = \TUPAPI::putInt64($paramName,$bigint);
             $this->encodeBufs[$paramName] = $int64Buffer;
             return self::TARS_SUCCESS;
 
@@ -261,7 +261,7 @@ class TarsAssistant
 
     public function getInt64($name) {
         try {
-            $result = \TARSAPI::getInt64($name,$this->decodeData);
+            $result = \TUPAPI::getInt64($name,$this->decodeData);
 
             return  $result;
         } catch (\Exception $e) {
@@ -271,7 +271,7 @@ class TarsAssistant
 
     public function putDouble($paramName,$double) {
         try {
-            $doubleBuffer = \TARSAPI::putDouble($paramName,$double);
+            $doubleBuffer = \TUPAPI::putDouble($paramName,$double);
             $this->encodeBufs[$paramName] = $doubleBuffer;
             return  self::TARS_SUCCESS;
         } catch (\Exception $e) {
@@ -281,7 +281,7 @@ class TarsAssistant
 
     public function getDouble($name) {
         try {
-            $result = \TARSAPI::getDouble($name,$this->decodeData);
+            $result = \TUPAPI::getDouble($name,$this->decodeData);
 
             return  $result;
         } catch (\Exception $e) {
@@ -293,7 +293,7 @@ class TarsAssistant
 
     public function putFloat($paramName,$float) {
         try {
-            $floatBuffer = \TARSAPI::putFloat($paramName,$float);
+            $floatBuffer = \TUPAPI::putFloat($paramName,$float);
             $this->encodeBufs[$paramName] = $floatBuffer;
             return  self::TARS_SUCCESS;
         } catch (\Exception $e) {
@@ -304,7 +304,7 @@ class TarsAssistant
 
     public function getFloat($name) {
         try {
-            $result = \TARSAPI::getFloat($name,$this->decodeData);
+            $result = \TUPAPI::getFloat($name,$this->decodeData);
 
             return $result;
         } catch (\Exception $e) {
@@ -314,7 +314,7 @@ class TarsAssistant
 
     public function putString($paramName,$string) {
         try {
-            $stringBuffer = \TARSAPI::putString($paramName,$string);
+            $stringBuffer = \TUPAPI::putString($paramName,$string);
             $this->encodeBufs[$paramName] = $stringBuffer;
             return self::TARS_SUCCESS;
         } catch (\Exception $e) {
@@ -325,7 +325,7 @@ class TarsAssistant
 
     public function getString($name) {
         try {
-            $result = \TARSAPI::getString($name,$this->decodeData);
+            $result = \TUPAPI::getString($name,$this->decodeData);
             return  $result;
 
         } catch (\Exception $e) {
@@ -336,7 +336,7 @@ class TarsAssistant
 
     public function putVector($paramName,$vec) {
         try {
-            $vecBuffer = \TARSAPI::putVector($paramName,$vec);
+            $vecBuffer = \TUPAPI::putVector($paramName,$vec);
             $this->encodeBufs[$paramName] = $vecBuffer;
             return self::TARS_SUCCESS;
 
@@ -348,7 +348,7 @@ class TarsAssistant
 
     public function getVector($name,$vec) {
         try {
-            $result = \TARSAPI::getVector($name,$vec,$this->decodeData);
+            $result = \TUPAPI::getVector($name,$vec,$this->decodeData);
 
             return  $result;
         } catch (\Exception $e) {
@@ -360,7 +360,7 @@ class TarsAssistant
 
     public function putMap($paramName,$map) {
         try {
-            $mapBuffer = \TARSAPI::putMap($paramName,$map);
+            $mapBuffer = \TUPAPI::putMap($paramName,$map);
 
             $this->encodeBufs[$paramName] = $mapBuffer;
 
@@ -373,7 +373,7 @@ class TarsAssistant
 
     public function getMap($name,$obj) {
         try {
-            $result = \TARSAPI::getMap($name,$obj,$this->decodeData);
+            $result = \TUPAPI::getMap($name,$obj,$this->decodeData);
 
             return  $result;
         } catch (\Exception $e) {
@@ -383,7 +383,7 @@ class TarsAssistant
 
     public function putStruct($paramName,$obj) {
         try {
-            $structBuffer = \TARSAPI::putStruct($paramName,$obj);
+            $structBuffer = \TUPAPI::putStruct($paramName,$obj);
             $this->encodeBufs[$paramName] = $structBuffer;
             return self::TARS_SUCCESS;
         } catch (\Exception $e) {
@@ -394,7 +394,7 @@ class TarsAssistant
 
     public function getStruct($name,&$obj) {
         try {
-            $result = \TARSAPI::getStruct($name,$obj,$this->decodeData);
+            $result = \TUPAPI::getStruct($name,$obj,$this->decodeData);
 
             $this->fromArray($result,$obj);
             return 0;
@@ -407,7 +407,7 @@ class TarsAssistant
     public function sendAndReceive() {
         // 首先尝试encode
         try {
-            $this->requestBuf = \TARSAPI::encode($this->iVersion,self::$iRequestId,$this->servantName,
+            $this->requestBuf = \TUPAPI::encode($this->iVersion,self::$iRequestId,$this->servantName,
                 $this->funcName,$this->cPacketType,$this->iMessageType,$this->iTimeout,$this->contexts,$this->statuses,$this->encodeBufs);
             $this->encodeBufs = array();
 
@@ -430,7 +430,7 @@ class TarsAssistant
 
         // 其次尝试decode
         try {
-            $decodeRet = \TARSAPI::decode($this->responseBuf);
+            $decodeRet = \TUPAPI::decode($this->responseBuf);
             if($decodeRet['code'] !== self::TARS_SUCCESS) {
                 throw new TarsException($decodeRet['msg'], $decodeRet['code']);
             }
