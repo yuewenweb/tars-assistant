@@ -434,7 +434,7 @@ class TarsAssistant
             if($decodeRet['code'] !== self::TARS_SUCCESS) {
                 throw new TarsException($decodeRet['msg'], $decodeRet['code']);
             }
-            $this->decodeData = $decodeRet['buf'];
+            $this->decodeData = $decodeRet['sBuffer'];
 
             return array('code' => self::TARS_SUCCESS);
         }
