@@ -12,14 +12,14 @@ class TarsAssistant
     // 错误码定义（需要从扩展开始规划）
     const TARS_SUCCESS = 0; // taf
 
-    const TARS_SOCKET_SET_NONBLOCK_FAILED = -2; // socket设置非阻塞失败
-    const TARS_SOCKET_SEND_FAILED = -3; // socket发送失败
-    const TARS_SOCKET_RECEIVE_FAILED = -4; // socket接收失败
-    const TARS_SOCKET_SELECT_TIMEOUT = -5; // socket的select超时，也可以认为是svr超时
-    const TARS_SOCKET_TIMEOUT = -6; // socket超时，一般是svr后台没回包，或者seq错误
-    const TARS_SOCKET_CONNECT_FAILED = -7; // socket tcp 连接失败
-    const TARS_SOCKET_CLOSED = -8; // socket tcp 服务端连接关闭
-    const TARS_SOCKET_CREATE_FAILED = -70;
+    const TARS_SOCKET_SET_NONBLOCK_FAILED = -1002; // socket设置非阻塞失败
+    const TARS_SOCKET_SEND_FAILED = -1003; // socket发送失败
+    const TARS_SOCKET_RECEIVE_FAILED = -1004; // socket接收失败
+    const TARS_SOCKET_SELECT_TIMEOUT = -1005; // socket的select超时，也可以认为是svr超时
+    const TARS_SOCKET_TIMEOUT = -1006; // socket超时，一般是svr后台没回包，或者seq错误
+    const TARS_SOCKET_CONNECT_FAILED = -1007; // socket tcp 连接失败
+    const TARS_SOCKET_CLOSED = -1008; // socket tcp 服务端连接关闭
+    const TARS_SOCKET_CREATE_FAILED = -1070;
 
     // taf服务端可能返回的错误码
     const SERVERSUCCESS       = 0; //服务器端处理成功
