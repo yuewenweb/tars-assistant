@@ -13,7 +13,7 @@ phptars是一个用于调用tars服务的php帮助类，其中对phptars扩展�
 
 3. 在composer.json中指定require类库:
 ```
-    "phptars/tars-assistant" : "0.1.3"
+    "phptars/tars-assistant" : "0.1.5"
 ```
 
 4. 执行composer install命令安装类库,此时会出现vendor目录
@@ -38,7 +38,7 @@ phptars是一个用于调用tars服务的php帮助类，其中对phptars扩展�
     try {
         $intVal = $servant->singleParam($in1,$ss1,$out1);
     }
-    catch(TUP_Exception $e) {
+    catch(phptars\TarsException $e) {
         // 错误处理
     }
 ```
