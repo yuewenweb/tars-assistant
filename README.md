@@ -13,7 +13,7 @@ phptars是一个用于调用tars服务的php帮助类，其中对phptars扩展�
 
 3. 在composer.json中指定require类库:
 ```
-    "phptars/tars-assistant" : "0.1.7"
+    "phptars/tars-assistant" : "vx.x.x"
 ```
 
 4. 执行composer install命令安装类库,此时会出现vendor目录
@@ -26,19 +26,22 @@ phptars是一个用于调用tars服务的php帮助类，其中对phptars扩展�
 
     $ip = "";// taf服务ip
     $port = 0;// taf服务端口
-    $servant = new App\Server\Servant\servant($ip,$port);
-
-    $in1 = "test";
-
-    $ss1 = new SimpleStruct();
-    $ss1->id = 1;
-    $ss1->count = 2;
-    $ss1->page = 3;
-
+    $hello = new \TestApp\HelloServer\HelloObj\Hello($ip,$port);
+    
+    // 或使用主控寻址
+    $_SERVER['LOCATOR_IP'] = "172.16.0.161";
+    $_SERVER['LOCATOR_PORT'] = 17890;
+    // 无需指定ip和端口
+    $hello = new \TestApp\HelloServer\HelloObj\Hello();
+    
     try {
-        $intVal = $servant->singleParam($in1,$ss1,$out1);
+        $hello->testHello("test",$rsp);
+        var_dump($rsp);
     }
     catch(phptars\TarsException $e) {
         // 错误处理
     }
+    
+
+    
 ```
