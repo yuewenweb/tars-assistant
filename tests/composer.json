@@ -1,0 +1,13 @@
+{
+    "name": "test",
+    "minimum-stability": "dev",
+    "require": {
+      "php": ">=5.3"
+    },
+    "autoload": {
+      "psr-4": {
+        "TestApp\\": "TestApp/",
+        "phptars\\": "../src/"
+      }
+    }
+}

@@ -2,7 +2,7 @@
     "name": "phptars/tars-assistant",
     "description": "phpassistant for tars client",
     "license":"MIT",
-    "version":"0.1.7",
+    "version":"0.2.0",
     "authors": [
         {
             "name": "Chen Liang",
@@ -11,12 +11,13 @@
     ],
     "minimum-stability": "dev",
     "require": {
-      "php": "<=7.1.10"
+      "php": ">=5.3"
     },
     "autoload": {
       "classmap": [
-        "TarsAssistant.php",
-        "TarsException.php"
+        "src/TarsAssistant.php",
+        "src/TarsException.php",
+        "src/EndpointF.php"
       ]
     }
 }

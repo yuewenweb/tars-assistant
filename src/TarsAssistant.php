@@ -58,8 +58,22 @@ class TarsAssistant
     public function setRequest($servantName,$funcName,$ip="", $port=0,$mode=self::SOCKET_MODE_TCP,
                                $iVersion=3,$cPacketType=0,$iMessageType=0,$iTimeout=2,$contexts=array(),$statuses=array())
     {
-        $this->sIp = $ip;
-        $this->iPort = $port;
+        if(empty($ip)) {
+            $ret = $this->getRoute($servantName);
+            if($ret['code'] != self::TARS_SUCCESS) {
+                $this->sIp = "";
+            }
+            else {
+                $this->sIp = $ret['data']['sIp'];
+                $this->iPort = $ret['data']['iPort'];
+                $this->socketMode = ($ret['data']['bTcp']?self::SOCKET_MODE_TCP:self::SOCKET_MODE_UDP);
+            }
+
+        }
+        else {
+            $this->sIp = $ip;
+            $this->iPort = $port;
+        }
 
         $this->servantName = $servantName;
         $this->funcName = $funcName;
@@ -79,6 +93,65 @@ class TarsAssistant
         if (!empty($statuses)) {
             $this->statuses = $statuses;
         }
+    }
+
+    /**
+     * 从agent获取主控
+     */
+    private function getRoute($sObj)
+    {
+        // 主控根据不同环境进行切换,也可以从环境配置中读取
+        $ip = isset($_SERVER['LOCATOR_IP'])?$_SERVER['LOCATOR_IP']:'127.0.0.1';
+        $port = isset($_SERVER['LOCATOR_PORT'])?$_SERVER['LOCATOR_PORT']:17890;
+
+        $this->sIp = $ip;
+        $this->iPort = $port;
+
+        // 进行寻址的请求,暂不支持灰度参数
+        $iVersion = 3;
+        $iRequestId = self::$iRequestId;
+        $servantName = "tars.tarsregistry.QueryObj";
+        $funcName = "findObjectById";
+
+        $stringBuffer = \TUPAPI::putString("id",$sObj);
+        $inbuf_arr = [
+            'id' => $stringBuffer
+        ];
+
+        $this->requestBuf = \TUPAPI::encode($iVersion, $iRequestId, $servantName, $funcName,
+            $this->cPacketType,$this->iMessageType,$this->iTimeout,$this->contexts,$this->statuses,
+            $inbuf_arr);
+
+
+        // 超时时间为2秒
+        $this->tcpSocket();
+
+        $decodeRet = \TUPAPI::decode($this->responseBuf);
+        if($decodeRet['code'] !== self::TARS_SUCCESS) {
+            throw new TarsException($decodeRet['msg'], $decodeRet['code']);
+        }
+        $decodeData = $decodeRet['sBuffer'];
+
+        $addrs = $result = \TUPAPI::getVector("",new \TARS_VECTOR(new EndpointF()),$decodeData);
+
+        // 从获取的地址中随机出一个来
+        $count = count($addrs);
+        $seed = rand(0, $count - 1);
+
+        if(isset($addrs[0])){
+            $addrTemp = $addrs[$seed];
+            $addr['sIp'] = $addrTemp['host'];
+            $addr['iPort'] = $addrTemp['port'];
+            $addr['bTcp'] = $addrTemp['istcp'];
+        }
+        else {
+            $addr = [];
+        }
+
+        return [
+            'code' => self::TARS_SUCCESS,
+            'data' => $addr
+        ];
     }
 
     public function putBool($paramName,$bool) {
